@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Путівник командних лабораторних</title>
+<meta name="description" content="Що таке ЛР1 і ЛР2, хто за що відповідає, чеклист перед подачею та інструменти для вимог і user stories.">
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --ink:#1d2321; --mute:#5c6762; --line:#dcdad2;
+  --accent:#0f6b54; --accent-ink:#ffffff; --soft:#e4f1ec; --warn:#8a5a00; --warn-bg:#fdf1d8; --bad:#a3261c;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141816; --card:#1c211f; --ink:#e8ece9; --mute:#9aa7a0; --line:#2e3834;
+    --accent:#4cc2a0; --accent-ink:#0c1a15; --soft:#1f2f29; --warn:#f0c36a; --warn-bg:#33290f; --bad:#ff8c80;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141816; --card:#1c211f; --ink:#e8ece9; --mute:#9aa7a0; --line:#2e3834;
+  --accent:#4cc2a0; --accent-ink:#0c1a15; --soft:#1f2f29; --warn:#f0c36a; --warn-bg:#33290f; --bad:#ff8c80;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 64px}
+header{padding:32px 0 12px}
+h1{font-size:1.75rem;line-height:1.2;margin:0 0 8px}
+h2{font-size:1.25rem;margin:0 0 10px}
+h3{font-size:1.02rem;margin:18px 0 6px}
+p{margin:8px 0}
+.lead{color:var(--mute);max-width:62ch}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:5;border-bottom:1px solid var(--line)}
+nav a{color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:.9rem;background:var(--card)}
+nav a:hover,nav a:focus-visible{border-color:var(--accent);color:var(--accent)}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin:18px 0}
+table{width:100%;border-collapse:collapse;font-size:.93rem;margin:8px 0}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.03em}
+.tablewrap{overflow-x:auto}
+label{display:block;font-weight:600;font-size:.88rem;margin:12px 0 4px}
+input[type=text],textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.row{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+@media (max-width:640px){.row{grid-template-columns:1fr}}
+button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);padding:8px 14px;margin-top:12px}
+button.ghost{background:transparent;color:var(--accent)}
+.out{margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--soft);white-space:pre-wrap}
+.note{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--warn-bg);color:var(--warn);font-size:.92rem}
+.note:empty,.out:empty{display:none}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent)}
+.check span{flex:1}
+.tabs{display:flex;gap:8px;margin-bottom:6px}
+.tabs button{margin:0;background:transparent;color:var(--accent)}
+.tabs button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.tag{display:inline-block;font-size:.75rem;padding:1px 8px;border-radius:999px;background:var(--soft);color:var(--accent);margin-left:6px}
+.soon{color:var(--mute);font-style:italic}
+dl{margin:0}
+dt{font-weight:700;margin-top:10px}
+dd{margin:2px 0 0;color:var(--mute)}
+footer{color:var(--mute);font-size:.85rem;margin-top:28px}
+code{background:var(--bg);padding:1px 5px;border-radius:5px;font-size:.9em}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Путівник командних лабораторних</h1>
+  <p class="lead">«Вступ до спеціальності»: що таке ЛР1 і ЛР2, хто за що відповідає, що перевірити перед подачею, і два конструктори для вимог і user stories. ЛР3 додамо, коли з'являться матеріали.</p>
+</header>
+
+<nav aria-label="Розділи">
+  <a href="#labs">Що таке ЛР</a>
+  <a href="#roles">Хто за що</a>
+  <a href="#check">Чеклист</a>
+  <a href="#nfr">Конструктор NFR</a>
+  <a href="#us">Конструктор US</a>
+  <a href="#ids">Перевірка ID</a>
+  <a href="#gloss">Словник</a>
+</nav>
+
+<section id="labs">
+  <h2>Що таке ЛР1, ЛР2, ЛР3</h2>
+  <dl>
+    <dt>ЛР1 — паспорт проєкту</dt>
+    <dd>Що за продукт і яку проблему він розв'язує, хто в команді й з якими ролями, угода про роботу (що робимо, якщо думки розійшлись), ризики, план ітерації, як використовували ШІ. Усе це збирається в один файл.</dd>
+    <dt>ЛР2 — дослідження потреб, вимоги, backlog</dt>
+    <dd>Перевіряємо проблему на реальних людях і записуємо, що система має робити (FR) і як добре (NFR). Результат — п'ять артефактів, зведених в один файл:</dd>
+  </dl>
+  <ol>
+    <li><b>Дані та зацікавлені сторони.</b> Хто створює, змінює й читає дані; карта сторін S1–S7: потреба, вплив, ризик конфлікту.</li>
+    <li><b>Свідчення.</b> Інтерв'ю або опитування з реальними відповідями. Лише знеособлено: роль і група, без прізвищ і контактів. Факт (людина сказала) відділяйте від припущення (ми вирішили).</li>
+    <li><b>Функціональні вимоги й backlog.</b> 8–12 FR та щонайменше 10 user stories; кожна історія посилається на FR і має критерії приймання.</li>
+    <li><b>Нефункціональні вимоги й матриця простежуваності.</b> 4–6 NFR, кожна з умовою й числом; матриця зв'язує сторону, вимогу, історію й перевірку, а «сироти» (вимога без сторони, історія без FR) мають бути знайдені.</li>
+    <li><b>Пріоритети MoSCoW і три письмові відповіді.</b> Що Must, а що ні, і чому; плюс журнал внеску кожного.</li>
+  </ol>
+  <dl>
+    <dt>ЛР3</dt>
+    <dd class="soon">Матеріалів ще немає. Розділ з'явиться, коли команда отримає завдання.</dd>
+  </dl>
+  <p class="note" style="display:block">Це скорочення для орієнтиру. Точні вимоги й строки дивіться в методичці та завданні в Moodle.</p>
+</section>
+
+<section id="roles">
+  <h2>Хто за що відповідає</h2>
+  <p>Ролі з командного розподілу. Найкорисніше правило: <b>кожен артефакт має одного відповідального</b>, а решта читає й перевіряє.</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Роль</th><th>Артефакт у ЛР2</th><th>Що перевіряє в сусідів</th></tr></thead>
+    <tbody>
+      <tr><td>Власник продукту</td><td>1. Дані й зацікавлені сторони; 5. MoSCoW і три відповіді; зведення файлу</td><td>Чи кожна вимога має сторону й чи Must справді перевіряє головну цінність</td></tr>
+      <tr><td>Дослідник користувачів</td><td>2. Свідчення (інтерв'ю або опитування)</td><td>Чи відповіді знеособлені, чи факти відділені від припущень</td></tr>
+      <tr><td>Аналітик backlog</td><td>3. FR і user stories</td><td>Чи кожна US має FR, критерій і оцінку</td></tr>
+      <tr><td>Якість і тестування</td><td>4. NFR і матриця простежуваності</td><td>Чи ID у всіх файлах збігаються; чи є «сироти»</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Якщо людина не встигає зі своїм артефактом, скажіть про це в команді <b>до</b> строку, а не в день подачі: так можна розподілити роботу заново.</p>
+</section>
+
+<section id="check">
+  <h2>Чеклист перед подачею</h2>
+  <p>Позначки зберігаються у вашому браузері. Не відправляються нікуди.</p>
+  <div class="tabs" role="group" aria-label="Лабораторна">
+    <button type="button" data-lab="lr1" aria-pressed="false">ЛР1</button>
+    <button type="button" data-lab="lr2" aria-pressed="true">ЛР2</button>
+  </div>
+  <div id="checklist"></div>
+  <button type="button" class="ghost" id="resetCheck">Скинути позначки</button>
+  <div class="out" id="checkOut" aria-live="polite"></div>
+</section>
+
+<section id="nfr">
+  <h2>Конструктор нефункціональної вимоги</h2>
+  <p>Формула: «За умови <i>коли або де</i>, <i>що</i> <i>число або те, що можна спостерігати</i>». Без числа вимогу не перевірити.</p>
+  <div class="row">
+    <div><label for="nfrCat">Категорія</label>
+      <select id="nfrCat"><option>Швидкість</option><option>Надійність</option><option>Безпека й персональні дані</option><option>Зручність</option><option>Автономність</option><option>Актуальність даних</option></select></div>
+    <div><label for="nfrSrc">Джерело (S… або номер опитування)</label><input type="text" id="nfrSrc" placeholder="наприклад: S3, опитування I1"></div>
+  </div>
+  <label for="nfrCond">Умова</label><input type="text" id="nfrCond" placeholder="коли староста вносить зміну в розклад">
+  <label for="nfrWhat">Що робить система</label><input type="text" id="nfrWhat" placeholder="зміна з'являється в календарі">
+  <label for="nfrNum">Критерій (число й одиниця)</label><input type="text" id="nfrNum" placeholder="не пізніше ніж за 2 години">
+  <label for="nfrHow">Як перевірити</label><input type="text" id="nfrHow" placeholder="внести зміну о 10:00, відкрити календар о 12:00">
+  <button type="button" id="nfrGo">Скласти</button>
+  <button type="button" class="ghost" id="nfrCopy">Копіювати</button>
+  <div class="out" id="nfrOut" aria-live="polite"></div>
+  <div class="note" id="nfrNote" aria-live="polite"></div>
+</section>
+
+<section id="us">
+  <h2>Конструктор user story</h2>
+  <div class="row">
+    <div><label for="usRole">Як… (роль)</label><input type="text" id="usRole" placeholder="студент-заочник"></div>
+    <div><label for="usFr">Яку FR закриває</label><input type="text" id="usFr" placeholder="FR-03"></div>
+  </div>
+  <label for="usWant">Я хочу… (дія)</label><input type="text" id="usWant" placeholder="бачити скасування пари в календарі">
+  <label for="usWhy">Щоб… (навіщо)</label><input type="text" id="usWhy" placeholder="не заходити в порожній Zoom">
+  <div class="row">
+    <div><label for="usGiven">Дано (стан)</label><input type="text" id="usGiven" placeholder="пару позначено скасованою"></div>
+    <div><label for="usThen">Тоді (результат)</label><input type="text" id="usThen" placeholder="у календарі подія має позначку «СКАСОВАНО»"></div>
+  </div>
+  <label for="usWhen">Коли (дія)</label><input type="text" id="usWhen" placeholder="календар оновився">
+  <div class="row">
+    <div><label for="usEst">Оцінка</label>
+      <select id="usEst"><option>1</option><option>2</option><option>3</option><option>5</option><option>8</option></select></div>
+    <div><label for="usPri">MoSCoW</label>
+      <select id="usPri"><option>Must</option><option>Should</option><option>Could</option><option>Won't</option></select></div>
+  </div>
+  <button type="button" id="usGo">Скласти</button>
+  <button type="button" class="ghost" id="usCopy">Копіювати</button>
+  <div class="out" id="usOut" aria-live="polite"></div>
+  <div class="note" id="usNote" aria-live="polite"></div>
+</section>
+
+<section id="ids">
+  <h2>Перевірка ID у зведеному файлі</h2>
+  <p>Вставте сюди весь текст зведеного файлу. Інструмент знайде ID (<code>FR-01</code>, <code>US-03</code>, <code>NFR-02</code>, <code>S4</code>), порахує згадки й покаже підозрілі місця: прогалини в нумерації та ID, згаданий лише раз. Текст нікуди не надсилається: обробка в браузері.</p>
+  <label for="idsIn">Текст</label>
+  <textarea id="idsIn" placeholder="Вставте текст…"></textarea>
+  <button type="button" id="idsGo">Перевірити</button>
+  <div class="out" id="idsOut" aria-live="polite"></div>
+</section>
+
+<section id="gloss">
+  <h2>Словник</h2>
+  <dl>
+    <dt>S1, S2…</dt><dd>Зацікавлені сторони: люди й ролі, на яких впливає продукт або які впливають на нього.</dd>
+    <dt>FR</dt><dd>Функціональна вимога: що система робить («староста може позначити пару скасованою»). Одна вимога — одна дія.</dd>
+    <dt>NFR</dt><dd>Нефункціональна вимога: як добре вона це робить (швидко, надійно, безпечно), з числом.</dd>
+    <dt>US</dt><dd>User story: «Як…, я хочу…, щоб…» з критеріями приймання.</dd>
+    <dt>Критерій приймання (Дано–Коли–Тоді)</dt><dd>Як побачити, що історія виконана: стан до, дія, результат.</dd>
+    <dt>MoSCoW</dt><dd>Пріоритет: Must (без цього продукт безглуздий), Should, Could, Won't (не цього разу).</dd>
+    <dt>Матриця простежуваності</dt><dd>Таблиця, яка веде від сторони до потреби, вимоги, історії й перевірки. Нею шукають «сиріт».</dd>
+    <dt>«Сирота»</dt><dd>Вимога без сторони, історія без FR або вимога без способу перевірки.</dd>
+    <dt>Факт і припущення</dt><dd>Факт: людина це сказала або показала. Припущення: ми так вважаємо. Їх треба позначати окремо.</dd>
+  </dl>
+</section>
+
+<footer>
+  Сторінка навчальна й не замінює методичку. Усе зберігається лише в вашому браузері.
+  <a href="#" id="themeBtn" style="margin-left:8px">Змінити тему</a>
+</footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+  /* тема */
+  var t=store.get('lg-theme'); if(t) document.documentElement.setAttribute('data-theme',t);
+  $('themeBtn').addEventListener('click',function(e){
+    e.preventDefault();
+    var cur=document.documentElement.getAttribute('data-theme');
+    var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next=dark?'light':'dark';
+    document.documentElement.setAttribute('data-theme',next); store.set('lg-theme',next);
+  });
+
+  /* чеклист */
+  var LISTS={
+    lr1:["Усі артефакти зведені в один файл у форматі, який просить викладач","На титулі є назва команди й дата подання (без «[дата]» і інших заглушок)","У властивостях файлу «Автор» і «Ким змінено» — ваше ПІБ у форматі «Прізвище І. Б.»","Ризики мають оцінку й власника, угода має спосіб розв'язати суперечку","Використання ШІ описано","Файл завантажено в завдання Moodle й натиснуто «Зберегти»","Після подачі статус у завданні — «Подано»"],
+    lr2:["Усі 5 артефактів зведені в один файл у форматі, який просить викладач","Нумерація FR, US, NFR без прогалин (перевірте в розділі «Перевірка ID»)","Кожна US посилається на FR, має критерій приймання й оцінку","Кожна NFR має умову, число й спосіб перевірки","Інтерв'ю або опитування: лише знеособлені дані; факти відділені від припущень; якщо відповідей немає, так і написано","У матриці знайдені «сироти» й записано, що з ними робити","Шаблонні приклади (FR-00, US-00, NFR-00) видалені","Однакові назви ролей і ID в усіх артефактах","Журнал внеску заповнений кожним, з позначкою про використання ШІ","У властивостях файлу «Автор» і «Ким змінено» — ваше ПІБ у форматі «Прізвище І. Б.»","Файл завантажено в завдання Moodle й натиснуто «Зберегти»","Після подачі статус у завданні — «Подано»"]
+  };
+  var lab='lr2';
+  function load(){var v=store.get('lg-check-'+lab);try{return v?JSON.parse(v):[]}catch(e){return[]}}
+  function renderCheck(){
+    var done=load(),box=$('checklist'); box.innerHTML='';
+    LISTS[lab].forEach(function(text,i){
+      var row=document.createElement('label'); row.className='check'; row.style.fontWeight='400'; row.style.margin='0';
+      var cb=document.createElement('input'); cb.type='checkbox'; cb.checked=done.indexOf(i)>-1;
+      cb.addEventListener('change',function(){
+        var cur=load(); var p=cur.indexOf(i);
+        if(cb.checked&&p<0)cur.push(i); if(!cb.checked&&p>-1)cur.splice(p,1);
+        store.set('lg-check-'+lab,JSON.stringify(cur)); status();
+      });
+      var sp=document.createElement('span'); sp.textContent=text;
+      row.appendChild(cb); row.appendChild(sp); box.appendChild(row);
+    });
+    status();
+  }
+  function status(){
+    var n=load().length,all=LISTS[lab].length;
+    $('checkOut').textContent=n===all?'Усе позначено. Перевірте ще раз у Moodle, що статус «Подано».':'Готово '+n+' з '+all+'.';
+  }
+  document.querySelectorAll('.tabs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      lab=b.getAttribute('data-lab');
+      document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      renderCheck();
+    });
+  });
+  $('resetCheck').addEventListener('click',function(){store.set('lg-check-'+lab,'[]');renderCheck()});
+  renderCheck();
+
+  function copy(id){
+    var txt=$(id).textContent; if(!txt)return;
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).catch(function(){})}
+  }
+  function v(id){return $(id).value.trim()}
+
+  /* NFR */
+  $('nfrGo').addEventListener('click',function(){
+    var cond=v('nfrCond'),what=v('nfrWhat'),num=v('nfrNum'),how=v('nfrHow'),src=v('nfrSrc'),cat=$('nfrCat').value;
+    var warn=[];
+    if(!cond)warn.push('Немає умови: коли або де це має виконуватись?');
+    if(!what)warn.push('Не вказано, що робить система.');
+    if(!num)warn.push('Немає критерію.'); else if(!/\d/.test(num)&&!/(кожн|жодн|лише|тільки|завжди|ніколи)/i.test(num))warn.push('У критерії немає числа чи чіткого правила. Чи можна його виміряти?');
+    if(!how)warn.push('Не вказано, як перевірити.');
+    if(!src)warn.push('Немає джерела: без сторони вимога стає «сиротою».');
+    $('nfrOut').textContent=(cat?'['+cat+'] ':'')+'За умови, що '+(cond||'…')+', '+(what||'…')+' '+(num||'…')+'.\nПеревірка: '+(how||'…')+'\nДжерело: '+(src||'…');
+    $('nfrNote').textContent=warn.join(' ');
+  });
+  $('nfrCopy').addEventListener('click',function(){copy('nfrOut')});
+
+  /* US */
+  $('usGo').addEventListener('click',function(){
+    var r=v('usRole'),w=v('usWant'),y=v('usWhy'),fr=v('usFr'),g=v('usGiven'),wh=v('usWhen'),th=v('usThen'),warn=[];
+    if(!r)warn.push('Не вказано роль.');
+    if(!w)warn.push('Не вказано дію.');
+    if(!y)warn.push('Немає «щоб»: без мети це завдання, а не історія.');
+    if(!fr)warn.push('Немає посилання на FR: історія без вимоги — «сирота».');
+    else if(!/^FR-\d{2}$/i.test(fr))warn.push('Формат FR — «FR-03» (дві цифри), щоб ID збігались в усіх артефактах.');
+    if(!g||!wh||!th)warn.push('Критерій приймання неповний: потрібні Дано, Коли, Тоді.');
+    if(/\bі\b.*\bі\b/i.test(w))warn.push('У дії кілька «і»: чи не склеєно дві історії в одну?');
+    $('usOut').textContent='Як '+(r||'…')+', я хочу '+(w||'…')+', щоб '+(y||'…')+'.\nКритерій: Дано '+(g||'…')+'; Коли '+(wh||'…')+'; Тоді '+(th||'…')+'.\nFR: '+(fr||'…')+' · Оцінка: '+$('usEst').value+' · '+$('usPri').value;
+    $('usNote').textContent=warn.join(' ');
+  });
+  $('usCopy').addEventListener('click',function(){copy('usOut')});
+
+  /* ID */
+  $('idsGo').addEventListener('click',function(){
+    var text=$('idsIn').value,out=$('idsOut');
+    if(!text.trim()){out.textContent='Вставте текст.';return}
+    var re=/\b(NFR|FR|US)-(\d{1,2})\b|\bS(\d{1,2})\b/g,m,map={};
+    while((m=re.exec(text))){
+      var key=m[1]?m[1]+'-'+('0'+m[2]).slice(-2):'S'+m[3];
+      map[key]=(map[key]||0)+1;
+    }
+    var keys=Object.keys(map).filter(function(k){return !/-00$/.test(k)});
+    if(!keys.length){out.textContent='ID не знайдено.';return}
+    var lines=[];
+    ['FR','US','NFR','S'].forEach(function(p){
+      var ks=keys.filter(function(k){return p==='S'?/^S\d/.test(k):k.indexOf(p+'-')===0});
+      if(!ks.length)return;
+      var nums=ks.map(function(k){return parseInt(k.replace(/\D/g,''),10)}).sort(function(a,b){return a-b});
+      var gaps=[]; for(var i=1;i<=nums[nums.length-1];i++){if(nums.indexOf(i)<0)gaps.push(i)}
+      lines.push(p+': '+ks.length+' шт. (до '+nums[nums.length-1]+')'+(gaps.length?'. Немає номерів: '+gaps.join(', '):'. Прогалин немає'));
+      var once=ks.filter(function(k){return map[k]===1});
+      if(once.length)lines.push('  згадано лише раз (перевірте зв\'язки): '+once.sort().join(', '));
+    });
+    var ex=Object.keys(map).filter(function(k){return /-00$/.test(k)});
+    if(ex.length)lines.push('Шаблонні приклади, які ще лишились: '+ex.join(', '));
+    out.textContent=lines.join('\n');
+  });
+})();
+</script>
+</body>
+</html>
